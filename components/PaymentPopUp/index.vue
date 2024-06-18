@@ -144,10 +144,10 @@
 </template>
 
 <script>
-import {mask} from 'vue-the-mask'
+import { mask } from "vue-the-mask";
 export default {
   name: "PaymentPopUp",
-  directives: {mask},
+  directives: { mask },
   props: {
     isPopup: {
       type: Boolean,
@@ -176,21 +176,20 @@ export default {
       );
     },
     months() {
-      return [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
+      const currentDate = new Date();
+      const monthsArray = [];
+
+      for (let i = 0; i < 12; i++) {
+        currentDate.setMonth(i);
+        const monthName = currentDate.toLocaleString("en-US", {
+          month: "long",
+        });
+        monthsArray.push(monthName);
+      }
+
+      return monthsArray;
     },
+
     isFormValid() {
       return this.validCardNumber && this.validExpiryDate && this.validCVC;
     },
@@ -200,7 +199,9 @@ export default {
       this.$emit("update:isPopup", false);
     },
     validateCardNumber() {
-        this.cardNumber < 12 ? this.validCardNumber = false : this.validCardNumber = true;
+      this.cardNumber < 12
+        ? (this.validCardNumber = false)
+        : (this.validCardNumber = true);
     },
     validateExpiryDate() {
       this.validExpiryDate = this.expiryMonth !== "" && this.expiryYear !== "";
@@ -212,6 +213,7 @@ export default {
     submitForm() {
       if (this.isFormValid) {
         alert("Form submitted successfully!");
+        this.$emit("update:isPopup", false);
       }
     },
   },
