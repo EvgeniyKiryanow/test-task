@@ -54,6 +54,7 @@ section {
     width: 100%;
     z-index: -1;
     min-height: 100vh;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -64,6 +65,7 @@ section {
     width: 100%;
     z-index: -1;
     min-height: 100vh;
+    height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

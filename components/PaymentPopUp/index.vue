@@ -1,116 +1,135 @@
 <template>
-  <div class="popup">
-    <form class="w-full max-w-lg">
-      <h3>Payments Methods</h3>
-
-      <button
-        type="button"
-        class="text-gray-900 bg-[#F7BE38] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
-      >
-        <NuxtImg src="images/PayPal.svg" />
-        BUY NOW
-      </button>
-
-      <button
-        type="button"
-        class="text-gray-900 bg-[white] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
-      >
-        <NuxtImg src="images/GPay.svg" />
-        Pay
-      </button>
-
-      <div class="relative flex items-center">
-        <div class="flex-grow border-t border-gray-400"></div>
-        <span class="flex-shrink mx-4 text-gray-400">Or</span>
-        <div class="flex-grow border-t border-gray-400"></div>
-      </div>
-
-      <div class="popup__card">
-        <label
-          for="card-number-input"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
-          >Card Number</label
+    <div v-if="isPopup" class="popup" @click.self="closePopup">
+      <form class="w-full max-w-lg">
+        <h3>Payment Method</h3>
+  
+        <button
+          type="button"
+          class="text-gray-900 bg-[#F7BE38] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
         >
-        <input
-          type="password"
-          id="card-number-input"
-          class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
-          placeholder="4242 4242 4242 4242"
-          pattern="^4[0-9]{12}(?:[0-9]{3})?$"
-          required
-        />
-        <div
-          class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
+          <NuxtImg src="images/PayPal.svg" />
+          BUY NOW
+        </button>
+  
+        <button
+          type="button"
+          class="text-gray-900 bg-[white] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
         >
-          <NuxtImg src="images/MasterCard.svg" />
+          <NuxtImg src="images/GPay.svg" />
+          Pay
+        </button>
+  
+        <div class="relative flex items-center">
+          <div class="flex-grow border-t border-gray-400"></div>
+          <span class="flex-shrink mx-4 text-gray-400">Or</span>
+          <div class="flex-grow border-t border-gray-400"></div>
         </div>
-      </div>
-
-      <div class="popup__date">
-        <div>
+  
+        <div class="popup__card">
           <label
-            for="Month"
+            for="card-number-input"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
-            >Month</label
+            >Card Number</label
           >
-          <select
-            id="month"
-            class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:text-white"
+          <input
+            type="password"
+            id="card-number-input"
+            class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+            placeholder="4242 4242 4242 4242"
+            pattern="^4[0-9]{12}(?:[0-9]{3})?$"
+            required
+          />
+          <div
+            class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
           >
-            <option selected>Select</option>
-            <option value="1991">1991</option>
-          </select>
-        </div>
-        <div>
-          <label
-            for="Year"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
-            >Year</label
-          >
-          <select
-            id="Year"
-            class="bg-[#617398] text-gray-900 text-sm rounded-lg dark:text-white block w-full p-2.5"
-          >
-            <option selected>Select</option>
-            <option value="September">September</option>
-          </select>
-        </div>
-        <div class="relative">
-          <div>
-            <label
-              for="cvc"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
-              >CVC</label
-            >
-            <input
-              type="password"
-              id="cvc"
-              class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
-              placeholder="424"
-              pattern="^4[0-9]{12}(?:[0-9]{3})?$"
-              required
-            />
+            <NuxtImg src="images/MasterCard.svg" />
           </div>
         </div>
-      </div>
+  
+        <div class="popup__date">
+          <div>
+            <label
+              for="Month"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+              >Month</label
+            >
+            <select
+              id="month"
+              class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:text-white"
+            >
+              <option selected>Select</option>
+              <option value="1991">1991</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="Year"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+              >Year</label
+            >
+            <select
+              id="Year"
+              class="bg-[#617398] text-gray-900 text-sm rounded-lg dark:text-white block w-full p-2.5"
+            >
+              <option selected>Select</option>
+              <option value="September">September</option>
+            </select>
+          </div>
+          <div class="relative">
+            <div>
+              <label
+                for="cvc"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+                >CVC</label
+              >
+              <input
+                type="password"
+                id="cvc"
+                class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+                placeholder="424"
+                pattern="^4[0-9]{12}(?:[0-9]{3})?$"
+                required
+              />
+            </div>
+          </div>
+        </div>
+  
+        <button
+          type="button"
+          class="text-white bg-[#617398] cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          disabled
+        >
+          Submit
+        </button>
+  
+        <button
+          type="button"
+          @click="closePopup"
+          class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </template>
+  
+<script>
+export default {
+  name: 'PaymentPopUp',
+  props: {
+    isPopup: {
+      type: Boolean,
+      required: true,
+    }
+  },
+  methods: {
+    closePopup() {
+      this.$emit('update:isPopup', false);
+    }
+  }
+}
+</script>
 
-      <button
-        type="button"
-        class="text-white bg-[#617398] cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        disabled
-      >
-        Submit
-      </button>
-
-      <button
-        type="button"
-        class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-      >
-        Cancel
-      </button>
-    </form>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .popup {
@@ -127,7 +146,7 @@
   background: rgba(0, 0, 0, 0.7);
   &__card {
     label {
-        width: 20%;
+      width: 20%;
       position: relative;
       bottom: -15px;
       left: 10px;
