@@ -4,8 +4,8 @@
     <div :class="`home-page__bg-${updatedPageType}`"></div>
     <TopHeader :pageType="updatedPageType" />
     <section>
-        <GetPlan :pageType="updatedPageType" />
-        <TrialBox :pageType="updatedPageType" />
+      <GetPlan :pageType="updatedPageType" />
+      <TrialBox :pageType="updatedPageType" />
     </section>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   components: {
     TopHeader,
     GetPlan,
-    TrialBox
+    TrialBox,
   },
   data() {
     return {
@@ -40,10 +40,12 @@ export default {
 
 <style lang="scss">
 section {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+ margin: 10vh 4vw;
+  & > div {
+    width: 40%;
+  }
 }
 .home-page {
   &__bg-main {
