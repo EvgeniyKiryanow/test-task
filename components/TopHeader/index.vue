@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <NuxtImg src="/images/Logo.svg" />
-    <h1><span>Planet</span>Learn</h1>
+    <h3><span>Planet</span>Learn</h3>
   </header>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
   height: 56px;
   width: 86%;
@@ -24,8 +24,8 @@ export default {
     height: 40px;
   }
 
-  h1 {
-    font-family: "Proxima Nova Regular";
+  h3 {
+    font-family: "Proxima Nova Bold";
     font-size: 24px;
     line-height: 29.23px;
     text-align: left;
