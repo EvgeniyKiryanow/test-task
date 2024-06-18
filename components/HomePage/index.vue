@@ -1,18 +1,27 @@
 <template>
   <div class="home-page" :class="updatedPageType">
+    <!-- TODO: update use mixin + mock data to avoid props not props for pageType -->
     <div :class="`home-page__bg-${updatedPageType}`"></div>
     <TopHeader :pageType="updatedPageType" />
+    <section>
+        <GetPlan :pageType="updatedPageType" />
+        <TrialBox :pageType="updatedPageType" />
+    </section>
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/TopHeader";
+import GetPlan from "@/components/GetPlan";
+import TrialBox from "@/components/TrialBox";
 import { useRoute } from "nuxt/app";
 import { queryHelper } from "@/helpers/queryHelper.js";
 
 export default {
   components: {
     TopHeader,
+    GetPlan,
+    TrialBox
   },
   data() {
     return {
@@ -30,6 +39,12 @@ export default {
 </script>
 
 <style lang="scss">
+section {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+}
 .home-page {
   &__bg-main {
     position: fixed;

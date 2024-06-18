@@ -59,14 +59,14 @@ export default {
     padding-left: 5px;
 
     span {
-      color: var(--main-orange-color); /* Adjust color as needed */
+      color: var(--main-color);
     }
   }
 
   &.main {
     h3 {
       span {
-        color: var(--main-orange-color);
+        color: var(--main-color);
       }
     }
   }
@@ -74,7 +74,7 @@ export default {
   &.secondary {
     h3 {
       span {
-        color: var(--secondary-orange-color);
+        color: var(--secondary-color);
       }
     }
   }
