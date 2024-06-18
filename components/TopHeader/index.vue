@@ -1,13 +1,40 @@
 <template>
-  <header class="header">
-    <NuxtImg src="/images/Logo.svg" />
-    <h3><span>Planet</span>Learn</h3>
+  <header :class="['header', pageType]">
+    <NuxtImg :src="pageConfig[pageType]?.logoSrc" />
+    <h3>
+      <span>{{ pageConfig[pageType]?.firstText }}</span
+      >{{ pageConfig[pageType]?.secondText }}
+    </h3>
   </header>
 </template>
 
 <script>
 export default {
   name: "TopHeader",
+  props: {
+    pageType: {
+      type: String,
+      required: true,
+      default: "main",
+      validator: (value) => ["main", "secondary"].includes(value),
+    },
+  },
+  computed: {
+    pageConfig() {
+      return {
+        main: {
+          logoSrc: "/images/MainLogo.svg",
+          firstText: "Planet",
+          secondText: "Learn",
+        },
+        secondary: {
+          logoSrc: "/images/SecondaryLogo.svg",
+          firstText: "Smart",
+          secondText: "Study",
+        },
+      };
+    },
+  },
 };
 </script>
 
@@ -30,9 +57,26 @@ export default {
     line-height: 29.23px;
     text-align: left;
     padding-left: 5px;
+
+    span {
+      color: var(--main-orange-color); /* Adjust color as needed */
+    }
   }
-  span {
-    color: var(--main-orange-color);
+
+  &.main {
+    h3 {
+      span {
+        color: var(--main-orange-color);
+      }
+    }
+  }
+
+  &.secondary {
+    h3 {
+      span {
+        color: var(--secondary-orange-color);
+      }
+    }
   }
 }
 </style>
