@@ -16,7 +16,7 @@
     },
     data() {
       return {
-        secondsRemaining: this.time * 60,
+        secondsRemaining: this.getTimeFromLocalStorage() || this.time * 60,
         intervalId: null
       };
     },
@@ -38,17 +38,28 @@
         this.intervalId = setInterval(() => {
           if (this.secondsRemaining > 0) {
             this.secondsRemaining--;
+            this.saveTimeToLocalStorage(this.secondsRemaining);
           } else {
             clearInterval(this.intervalId);
           }
         }, 1000); 
+      },
+      getTimeFromLocalStorage() {
+        return parseInt(localStorage.getItem('timer_time'), 10);
+      },
+      saveTimeToLocalStorage(seconds) {
+        localStorage.setItem('timer_time', seconds.toString());
       }
     },
     mounted() {
+      if (!this.getTimeFromLocalStorage()) {
+        this.saveTimeToLocalStorage(this.time * 60);
+      }
       this.startCountdown();
     },
     beforeDestroy() {
       clearInterval(this.intervalId);
+      this.saveTimeToLocalStorage(this.secondsRemaining);
     }
   };
   </script>
