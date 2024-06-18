@@ -1,5 +1,6 @@
 <template>
   <div :class="['get-plan', pageType]">
+    <PaymentPopUp v-if="isPopup" />
     <h1 class="get-plan__title">
       <span>Start</span> your learning journey <span>now</span>
     </h1>
@@ -13,15 +14,17 @@
       }}</span>
       plan to rock self-learning
     </h3>
-    <button class="font-bold py-4 px-16 rounded-full get-plan__button">
+    <button @click="togglePopup" class="font-bold py-4 px-16 rounded-full get-plan__button">
       Get my Plan
     </button>
   </div>
 </template>
 
 <script>
+import PaymentPopUp from "@/components/PaymentPopUp";
 export default {
   name: "GetPlan",
+  components: {PaymentPopUp},
   props: {
     pageType: {
       type: String,
@@ -29,6 +32,11 @@ export default {
       default: "main",
       validator: (value) => ["main", "secondary"].includes(value),
     },
+  },
+  data(){
+    return {
+        isPopup: false,
+    }
   },
   computed: {
     pageConfig() {
@@ -43,6 +51,11 @@ export default {
         },
       };
     },
+  },
+  methods: {
+    togglePopup() {
+        this.isPopup = !this.isPopup;
+    }
   },
 };
 </script>

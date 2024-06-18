@@ -1,7 +1,22 @@
 <template>
   <div :class="pageType" class="trial-box rounded rounded-2xl">
+    <!-- TODO: update color and for SVG and for text -->
     <div class="px-6 py-4">
-      <NuxtImg class="trial-box__img" src="/images/Asteroid.svg" />
+      <NuxtImg
+        v-if="pageType === 'main'"
+        class="trial-box__img"
+        src="/images/Asteroid.svg"
+      />
+      <!-- <NuxtImg
+        v-if="pageType === 'main'"
+        class="trial-box__img"
+        src="/images/Ball.svg"
+      /> -->
+      <NuxtImg
+        v-if="pageType === 'secondary'"
+        class="trial-box__img"
+        src="/images/Rocket.svg"
+      />
       <div class="trial-box__header">
         <div>
           <h3 class="trial-box__days">
@@ -11,7 +26,10 @@
           <h5 class="trial-box__price-week">$39.99/week</h5>
         </div>
         <div>
-          <Timer :time="5" />
+          <Timer
+            :bgColor="pageType === 'main' ? '#00CA14' : 'rgba(78, 170, 255, 1)'"
+            :time="5"
+          />
         </div>
       </div>
       <div>
@@ -67,13 +85,23 @@ export default {
     border: 1px solid grey;
     background-color: white;
     .type-format {
-      color: var(--main-color);
+      color: #01c120;
+    }
+    .trial-box__button {
+      color: var(--secondary-color);
     }
   }
   &.secondary {
     border: 4px solid rgba(255, 255, 255, 0.4);
-    background: transparent;
+    background: rgba(0, 0, 0, 0.4);
     .type-format {
+      color: var(--secondary-color);
+    }
+    .trial-box__img {
+      right: -100px;
+      top: 20%;
+    }
+    .trial-box__button {
       color: var(--secondary-color);
     }
   }
@@ -150,7 +178,6 @@ export default {
     width: 100%;
     border-radius: 15px;
     padding: 15px;
-    color: #01c120;
     font-family: "Proxima Nova Regular";
     font-size: 16px;
     font-weight: 600;
