@@ -2,7 +2,6 @@
   <div :class="pageType" class="trial_box rounded bg-white rounded-2xl">
     <div class="px-6 py-4">
       <NuxtImg class="trial_box__img" src="/images/Asteroid.svg" />
-      <!-- <div class="font-bold text-xl mb-2">The Coldest Sunset</div> -->
       <div>
         <div>
           <h3>3-day trial for $0.99</h3>
