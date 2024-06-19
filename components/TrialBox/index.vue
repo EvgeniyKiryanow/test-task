@@ -29,7 +29,6 @@
         </ul>
       </div>
       <button class="trial-box__button">
-        <!-- <NuxtImg src="/images/LockClosed.svg" /> -->
         <svg
           width="17"
           height="24"

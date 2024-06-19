@@ -34,6 +34,19 @@
           :class="{ 'bg-white dark:text-black': pageType === 'main' }"
           >Card Number</label
         >
+        <input
+        type="text"
+        class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+        id="credit-card"
+        v-model="transformedCardNumber"
+        @input="handleInput"
+        :class="{
+          'input-error': !validCardNumber && cardNumber.length > 0,
+          'bg-white text-black border text-gray-900 dark:text-black':
+            pageType === 'main',
+        }"
+        required
+      />
         <div
           class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
         >
@@ -146,21 +159,6 @@
       >
         Cancel
       </button>
-      <input
-        type="text"
-        class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
-        id="credit-card"
-        v-model="transformedCardNumber"
-        @input="handleInput"
-        :class="{
-          'input-error': !validCardNumber && cardNumber.length > 0,
-          'bg-white text-black border text-gray-900 dark:text-black':
-            pageType === 'main',
-        }"
-        required
-      />
-      <p>{{ transformedCardNumber }}</p>
-      <p>{{ cardNumber }}</p>
     </form>
   </div>
 </template>
@@ -277,6 +275,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media (max-width: 1024px) {
+  .popup__date {
+  div {
+    margin-bottom: unset !important;
+  }
+}
+ }
+
 .popup {
   position: fixed;
   z-index: 999;
@@ -290,10 +296,12 @@ export default {
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   &.main {
+    margin-bottom: 0 !important;
+    border-radius: unset !important;
     form {
       background: white;
-      input {
-        color: black;
+      input, label, select, option {
+        color: black !important;
       }
     }
     h3 {
@@ -301,6 +309,8 @@ export default {
     }
   }
   &.secondary {
+    margin-bottom: 0 !important;
+    border-radius: unset !important;
     form {
       background: rgba(77, 94, 130, 1);
       input {
