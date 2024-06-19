@@ -7,6 +7,20 @@
       <GetPlan v-if="isMobile" />
       <TrialBox />
     </section>
+    <div>
+      <input
+      type="text"
+      @input="handleInput"
+      :value="trueValue"
+      class="text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+    />
+    <input
+      type="text"
+      :value="computedVal"
+      class="text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+      readonly
+    />
+    </div>
   </div>
 </template>
 
@@ -30,10 +44,43 @@ export default {
   data() {
     return {
       parsedData: null,
+      newVal: null,
+      actualValue: null,
     };
   },
   mounted() {
     this.parsedData = mockData;
+  },
+  computed: {
+    // Compute the raw numeric value to be displayed in the first input
+    trueValue() {
+      return this.newVal || ''; // Show newVal or an empty string if not set
+    },
+    // Compute the masked value for the second input
+    computedVal() {
+      if (this.newVal) {
+        // Replace numbers with *, keep other characters unchanged, group by 4 for formatting
+        let maskedValue = this.newVal
+          .replace(/\d/g, "*") // Replace all digits with *
+          .replace(/(.{4})(?!$)/g, "$1 "); // Add a space after every 4 characters
+
+        return maskedValue.trim(); // Trim any trailing spaces
+      }
+      return '';
+    },
+  },
+
+  methods: {
+    handleInput(event) {
+      // Get raw input from the event
+      const rawInput = event.target.value;
+      // Filter to keep only numeric characters, limit to 16 characters
+      const filteredInput = rawInput.replace(/\D/g, "").slice(0, 16);
+      // Update newVal with the filtered numeric input
+      this.newVal = filteredInput;
+      // Directly set the input value to the filtered input for immediate feedback
+      event.target.value = filteredInput;
+    }
   },
 };
 </script>

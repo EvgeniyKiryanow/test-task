@@ -34,19 +34,32 @@
           :class="{ 'bg-white dark:text-black': pageType === 'main' }"
           >Card Number</label
         >
-        <input
-        type="text"
-        class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
-        id="credit-card"
-        v-model="transformedCardNumber"
-        @input="handleInput"
-        :class="{
-          'input-error': !validCardNumber && cardNumber.length > 0,
-          'bg-white text-black border text-gray-900 dark:text-black':
-            pageType === 'main',
-        }"
-        required
-      />
+        <div class="popup__cart-wrapper">
+          <input
+            type="text"
+            class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+            id="hidden-card"
+            v-model="transformedCardNumber"
+            @input="handleInput"
+            :class="{
+              'input-error': !validCardNumber && cardNumber.length > 0,
+              'bg-white text-black border text-gray-900 dark:text-black':
+                pageType === 'main',
+            }"
+          />
+          <input
+            type="text"
+            class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+            id="credit-card"
+            :value="nativeCardNumber"
+            :class="{
+              'input-error': !validCardNumber && cardNumber.length > 0,
+              'bg-white text-black border text-gray-900 dark:text-black':
+                pageType === 'main',
+            }"
+            required
+          />
+        </div>
         <div
           class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
         >
@@ -185,37 +198,22 @@ export default {
       validCardNumber: false,
       validExpiryDate: false,
       validCVC: false,
-      rawData: [],
+      newVal: null,
     };
   },
   computed: {
     transformedCardNumber() {
-      //   this.cardNumber = this.cardNumber.replace(/\D/g, "").slice(0, 16);
-      //   let cleanedInput = this.cardNumber;
-      //   let formattedNumber = cleanedInput.replace(/(\d{4})/g, "$1 ");
-      //   this.rawData = formattedNumber.trim();
-      //   return formattedNumber.trim();
+      return this.newVal || "";
+    },
+    nativeCardNumber() {
+      if (this.newVal) {
+        let maskedValue = this.newVal
+          .replace(/\d/g, "*")
+          .replace(/(.{4})(?!$)/g, "$1 ");
 
-      // --------
-    //   TODO: update
-      this.cardNumber = this.cardNumber.replace(/[^\d*-]/g, "").slice(0, 16);
-      let cleanedInput = this.cardNumber;
-
-      this.rawData.push(cleanedInput.replace(/[^\d]/g, ""));
-      const filteredArray = this.rawData.filter(item => item !== "");
-      console.log(filteredArray, "waData");
-
-      let formattedNumber = cleanedInput
-        .replace(/\d{1,4}|\D{1,4}/g, function (match) {
-          if (/\d/.test(match)) {
-            return match.replace(/\d/g, "*");
-          } else {
-            return match;
-          }
-        })
-        .replace(/(.{4})(?!$)/g, "$1 ");
-
-      return formattedNumber.trim();
+        return maskedValue.trim();
+      }
+      return "";
     },
     years() {
       const startYear = 1920;
@@ -247,8 +245,10 @@ export default {
   },
   methods: {
     handleInput(event) {
-      this.cardNumber = event.target.value;
-      console.log( event, ' event.target')
+      const rawInput = event.target.value;
+      const filteredInput = rawInput.replace(/\D/g, "").slice(0, 16);
+      this.newVal = filteredInput;
+      event.target.value = filteredInput;
     },
     closePopup() {
       this.$emit("update:isPopup", false);
@@ -277,11 +277,11 @@ export default {
 <style lang="scss" scoped>
 @media (max-width: 1024px) {
   .popup__date {
-  div {
-    margin-bottom: unset !important;
+    div {
+      margin-bottom: unset !important;
+    }
   }
 }
- }
 
 .popup {
   position: fixed;
@@ -295,12 +295,27 @@ export default {
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
+  label {
+    position: relative;
+    z-index: 5;
+  }
+  &__cart-wrapper {
+    position: relative;
+    #hidden-card {
+      position: absolute;
+      color: transparent !important;
+      background: transparent;
+    }
+  }
   &.main {
     margin-bottom: 0 !important;
     border-radius: unset !important;
     form {
       background: white;
-      input, label, select, option {
+      input,
+      label,
+      select,
+      option {
         color: black !important;
       }
     }
