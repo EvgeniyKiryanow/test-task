@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isPopup" class="popup" @click.self="closePopup" :class="pageType">
+  <div v-if="isPopup" class="popup" :class="pageType">
     <form class="w-full max-w-lg" @submit.prevent="submitForm">
       <h3>Payment Method</h3>
 
