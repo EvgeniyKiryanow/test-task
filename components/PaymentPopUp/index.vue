@@ -198,16 +198,16 @@ export default {
       validCardNumber: false,
       validExpiryDate: false,
       validCVC: false,
-      newVal: null,
+      newCardNumberVal: null,
     };
   },
   computed: {
     transformedCardNumber() {
-      return this.newVal || "";
+      return this.newCardNumberVal || "";
     },
     nativeCardNumber() {
-      if (this.newVal) {
-        let maskedValue = this.newVal
+      if (this.newCardNumberVal) {
+        let maskedValue = this.newCardNumberVal
           .replace(/\d/g, "*")
           .replace(/(.{4})(?!$)/g, "$1 ");
 
@@ -247,7 +247,7 @@ export default {
     handleInput(event) {
       const rawInput = event.target.value;
       const filteredInput = rawInput.replace(/\D/g, "").slice(0, 16);
-      this.newVal = filteredInput;
+      this.newCardNumberVal = filteredInput;
       event.target.value = filteredInput;
     },
     closePopup() {
