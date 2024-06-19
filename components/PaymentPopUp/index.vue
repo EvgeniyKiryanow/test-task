@@ -34,21 +34,6 @@
           :class="{ 'bg-white dark:text-black': pageType === 'main' }"
           >Card Number</label
         >
-        <input
-          type="password"
-          id="card-number-input"
-          class="bg-[#617398] border text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
-          placeholder="4242 4242 4242 4242"
-          v-mask="'####_####_####_####'"
-          v-model="cardNumber"
-          @input="validateCardNumber"
-          :class="{
-            'input-error': !validCardNumber && cardNumber.length > 0,
-            'bg-white text-black text-gray-900 dark:text-black':
-              pageType === 'main',
-          }"
-          required
-        />
         <div
           class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
         >
@@ -144,6 +129,7 @@
           'cursor-not-allowed': !isFormValid,
           'cursor-pointer': isFormValid,
           'bg-[#D2D2D2] dark:text-white ': pageType === 'main',
+          'bg-[#617398] dark:text-white ': pageType === 'secondary',
         }"
         :disabled="!isFormValid"
         @click="submitForm"
@@ -160,6 +146,21 @@
       >
         Cancel
       </button>
+      <input
+        type="text"
+        class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+        id="credit-card"
+        v-model="transformedCardNumber"
+        @input="handleInput"
+        :class="{
+          'input-error': !validCardNumber && cardNumber.length > 0,
+          'bg-white text-black border text-gray-900 dark:text-black':
+            pageType === 'main',
+        }"
+        required
+      />
+      <p>{{ transformedCardNumber }}</p>
+      <p>{{ cardNumber }}</p>
     </form>
   </div>
 </template>
@@ -190,9 +191,16 @@ export default {
       validCardNumber: false,
       validExpiryDate: false,
       validCVC: false,
+      rawData: null,
     };
   },
   computed: {
+    transformedCardNumber() {
+      let cleanedInput = this.cardNumber.replace(/\D/g, "").slice(0, 16);
+      let formattedNumber = cleanedInput.replace(/(\d{4})/g, "$1 ");
+      this.rawData = formattedNumber.trim();
+      return formattedNumber.trim();
+    },
     years() {
       const startYear = 1920;
       const currentYear = new Date().getFullYear();
@@ -222,6 +230,10 @@ export default {
     },
   },
   methods: {
+    handleInput(event) {
+      this.cardNumber = event.target.value;
+      this.cardNumber = this.cardNumber.replace(/\D/g, "");
+    },
     closePopup() {
       this.$emit("update:isPopup", false);
     },
