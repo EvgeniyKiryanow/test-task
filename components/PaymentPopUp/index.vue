@@ -196,7 +196,8 @@ export default {
   },
   computed: {
     transformedCardNumber() {
-      let cleanedInput = this.cardNumber.replace(/\D/g, "").slice(0, 16);
+      this.cardNumber = this.cardNumber.replace(/\D/g, "").slice(0, 16);
+      let cleanedInput = this.cardNumber;
       let formattedNumber = cleanedInput.replace(/(\d{4})/g, "$1 ");
       this.rawData = formattedNumber.trim();
       return formattedNumber.trim();
@@ -232,7 +233,6 @@ export default {
   methods: {
     handleInput(event) {
       this.cardNumber = event.target.value;
-      this.cardNumber = this.cardNumber.replace(/\D/g, "");
     },
     closePopup() {
       this.$emit("update:isPopup", false);
