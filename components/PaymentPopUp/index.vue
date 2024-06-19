@@ -248,13 +248,23 @@ export default {
       const rawInput = event.target.value;
       const filteredInput = rawInput.replace(/\D/g, "").slice(0, 16);
       this.newCardNumberVal = filteredInput;
+      this.newCardNumberVal.length < 16
+        ? (this.validCardNumber = false)
+        : (this.validCardNumber = true);
       event.target.value = filteredInput;
+    },
+    validateExpiryDate() {
+      this.validExpiryDate = this.expiryMonth !== "" && this.expiryYear !== "";
+    },
+    validateCVC() {
+      const regex = /^\d{3,4}$/;
+      this.validCVC = regex.test(this.cvc);
     },
     closePopup() {
       this.$emit("update:isPopup", false);
     },
     validateCardNumber() {
-      this.cardNumber < 12
+      this.cardNumber.length <= 12
         ? (this.validCardNumber = false)
         : (this.validCardNumber = true);
     },
