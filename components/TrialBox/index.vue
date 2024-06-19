@@ -1,37 +1,19 @@
 <template>
   <div :class="pageType" class="trial-box rounded rounded-2xl">
     <!-- TODO: update color and for SVG and for text -->
-    <div class="px-6 py-4">
-      <NuxtImg
-        v-if="pageType === 'main'"
-        class="trial-box__img"
-        src="/images/Asteroid.svg"
-      />
-      <!-- <NuxtImg
-        v-if="pageType === 'main'"
-        class="trial-box__img"
-        src="/images/Ball.svg"
-      /> -->
+    <GetPlan :pageType="pageType" />
+    <div class="px-6 py-4 trial-box__information">
+      <!-- <PriceAndTimer :pageType="pageType" /> -->
       <NuxtImg
         v-if="pageType === 'secondary'"
         class="trial-box__img"
         src="/images/Rocket.svg"
       />
-      <div class="trial-box__header">
-        <div>
-          <h3 class="trial-box__days">
-            3-day trial for <span class="type-format">$0.99</span>
-          </h3>
-          <h4 class="trial-box__price">Then $9.99</h4>
-          <h5 class="trial-box__price-week">$39.99/week</h5>
-        </div>
-        <div>
-          <Timer
-            :bgColor="pageType === 'main' ? '#00CA14' : 'rgba(78, 170, 255, 1)'"
-            :time="5"
-          />
-        </div>
-      </div>
+      <NuxtImg
+        v-if="pageType === 'main'"
+        class="trial-box__img"
+        src="/images/Asteroid.svg"
+      />
       <div>
         <ul class="trial-box__items custom-icons">
           <li class="trial-box__item">
@@ -63,10 +45,11 @@
 </template>
 
 <script>
-import Timer from "./_components/timer.vue";
+import PriceAndTimer from "@/components/PriceAndTimer";
+import GetPlan from "@/components/GetPlan";
 export default {
   name: "TrialBox",
-  components: { Timer },
+  components: { PriceAndTimer, GetPlan },
   props: {
     pageType: {
       type: String,
@@ -79,6 +62,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 940px) {
+  .trial-box {
+    &.main {
+      background-color: transparent !important;
+      border: unset !important;
+      .trial-box__information {
+        background: transparent;
+        li {
+          color: black;
+        }
+      }
+    }
+  }
+  .trial-box__img {
+    display: none;
+  }
+  .trial-box {
+    & > div {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
 .trial-box {
   position: relative;
   &.main {
@@ -104,38 +109,6 @@ export default {
     .trial-box__button {
       color: var(--secondary-color);
     }
-  }
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0 25px 0;
-  }
-  &__days {
-    font-family: "Proxima Nova Bold";
-    font-size: 24px;
-    font-weight: 800;
-    line-height: 28.8px;
-    text-align: left;
-    padding-bottom: 5px;
-  }
-  &__price {
-    font-family: "Proxima Nova Regular";
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 24px;
-    text-align: left;
-    padding-bottom: 5px;
-  }
-  &__price-week {
-    font-family: "Proxima Nova Regular";
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 22.4px;
-    text-align: left;
-    text-decoration: line-through;
-    padding-bottom: 5px;
-    color: lightgray;
   }
   &__img {
     position: absolute;

@@ -191,15 +191,36 @@ export default {
       validCardNumber: false,
       validExpiryDate: false,
       validCVC: false,
-      rawData: null,
+      rawData: [],
     };
   },
   computed: {
     transformedCardNumber() {
-      this.cardNumber = this.cardNumber.replace(/\D/g, "").slice(0, 16);
+      //   this.cardNumber = this.cardNumber.replace(/\D/g, "").slice(0, 16);
+      //   let cleanedInput = this.cardNumber;
+      //   let formattedNumber = cleanedInput.replace(/(\d{4})/g, "$1 ");
+      //   this.rawData = formattedNumber.trim();
+      //   return formattedNumber.trim();
+
+      // --------
+    //   TODO: update
+      this.cardNumber = this.cardNumber.replace(/[^\d*-]/g, "").slice(0, 16);
       let cleanedInput = this.cardNumber;
-      let formattedNumber = cleanedInput.replace(/(\d{4})/g, "$1 ");
-      this.rawData = formattedNumber.trim();
+
+      this.rawData.push(cleanedInput.replace(/[^\d]/g, ""));
+      const filteredArray = this.rawData.filter(item => item !== "");
+      console.log(filteredArray, "waData");
+
+      let formattedNumber = cleanedInput
+        .replace(/\d{1,4}|\D{1,4}/g, function (match) {
+          if (/\d/.test(match)) {
+            return match.replace(/\d/g, "*");
+          } else {
+            return match;
+          }
+        })
+        .replace(/(.{4})(?!$)/g, "$1 ");
+
       return formattedNumber.trim();
     },
     years() {
@@ -233,6 +254,7 @@ export default {
   methods: {
     handleInput(event) {
       this.cardNumber = event.target.value;
+      console.log( event, ' event.target')
     },
     closePopup() {
       this.$emit("update:isPopup", false);

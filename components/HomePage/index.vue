@@ -4,13 +4,15 @@
     <div :class="`home-page__bg-${updatedPageType}`"></div>
     <TopHeader :pageType="updatedPageType" />
     <section>
-      <GetPlan :pageType="updatedPageType" />
+      <PriceAndTimer :pageType="updatedPageType" />
+      <!-- <GetPlan :pageType="updatedPageType" /> -->
       <TrialBox :pageType="updatedPageType" />
     </section>
   </div>
 </template>
 
 <script>
+import PriceAndTimer from "@/components/PriceAndTimer";
 import TopHeader from "@/components/TopHeader";
 import GetPlan from "@/components/GetPlan";
 import TrialBox from "@/components/TrialBox";
@@ -22,6 +24,7 @@ export default {
     TopHeader,
     GetPlan,
     TrialBox,
+    PriceAndTimer,
   },
   data() {
     return {
@@ -42,27 +45,27 @@ export default {
 @media (max-width: 940px) {
   .home-page {
     section {
-    margin: 0 10vw;
-    flex-direction: column;
-    & > div {
-      width:100%;
-      color: white;
-    }
-    div {
-      &:first-child {
-        margin-bottom: 25px;
-        background: rgba(0, 0, 0, 0.5);
-        padding: 25px;
-        border-radius: 15px;
+      margin: 0 10vw;
+      flex-direction: column;
+      & > div {
+        width: 100%;
+        color: white;
+      }
+      div {
+        &:first-child {
+          margin-bottom: 25px;
+          // background: rgba(0, 0, 0, 0.5);
+          // padding: 25px;
+          border-radius: 15px;
+        }
       }
     }
-  }
   }
 }
 section {
   display: flex;
   justify-content: space-around;
- margin: 10vh 4vw;
+  margin: 10vh 4vw;
   & > div {
     width: 40%;
   }
