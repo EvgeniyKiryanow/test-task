@@ -35,7 +35,8 @@ class QueryHelper {
       updatedQuery = currentQueryParam || "";
     }
 
-    const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
+    const paramsString = urlSearchParams.toString();
+    const newUrl = `${window.location.pathname}${paramsString ? '?' + paramsString : ''}`;
     window.history.replaceState({}, "", newUrl);
 
     return updatedQuery;
