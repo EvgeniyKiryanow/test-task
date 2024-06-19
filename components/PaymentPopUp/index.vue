@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isPopup" class="popup" @click.self="closePopup">
+  <div v-if="isPopup" class="popup" @click.self="closePopup" :class="pageType">
     <form class="w-full max-w-lg" @submit.prevent="submitForm">
       <h3>Payment Method</h3>
 
@@ -13,7 +13,7 @@
       </button>
       <button
         type="button"
-        class="text-gray-900 bg-[white] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
+        class="text-gray-900 bg-[white] border focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
       >
         <NuxtImg src="images/GPay.svg" />
         Pay
@@ -31,17 +31,22 @@
         <label
           for="card-number-input"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+          :class="{ 'bg-white dark:text-black': pageType === 'main' }"
           >Card Number</label
         >
         <input
-          type="text"
+          type="password"
           id="card-number-input"
-          class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
+          class="bg-[#617398] border text-gray-900 text-sm rounded-lg block w-full pe-10 p-2.5"
           placeholder="4242 4242 4242 4242"
-          v-mask="'#### #### #### ####'"
+          v-mask="'####_####_####_####'"
           v-model="cardNumber"
           @input="validateCardNumber"
-          :class="{ 'input-error': !validCardNumber && cardNumber.length > 0 }"
+          :class="{
+            'input-error': !validCardNumber && cardNumber.length > 0,
+            'bg-white text-black text-gray-900 dark:text-black':
+              pageType === 'main',
+          }"
           required
         />
         <div
@@ -57,6 +62,7 @@
           <label
             for="month"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+            :class="{ 'bg-white dark:text-black': pageType === 'main' }"
             >Month</label
           >
           <select
@@ -64,7 +70,11 @@
             class="bg-[#617398] text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:text-white"
             v-model="expiryMonth"
             @change="validateExpiryDate"
-            :class="{ 'input-error': !validExpiryDate && expiryMonth !== '' }"
+            :class="{
+              'input-error': !validExpiryDate && expiryMonth !== '',
+              'bg-white dark:text-black border border-green-500':
+                pageType === 'main',
+            }"
             required
           >
             <option disabled value="">Select</option>
@@ -81,6 +91,7 @@
           <label
             for="Year"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+            :class="{ 'bg-white dark:text-black': pageType === 'main' }"
             >Year</label
           >
           <select
@@ -88,7 +99,11 @@
             class="bg-[#617398] text-gray-900 text-sm rounded-lg dark:text-white block w-full p-2.5"
             v-model="expiryYear"
             @change="validateExpiryDate"
-            :class="{ 'input-error': !validExpiryDate && expiryYear !== '' }"
+            :class="{
+              'input-error': !validExpiryDate && expiryYear !== '',
+              'bg-white dark:text-black border border-green-500':
+                pageType === 'main',
+            }"
             required
           >
             <option disabled value="">Select</option>
@@ -101,6 +116,7 @@
           <label
             for="cvc"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white bg-[#617398] rounded-lg"
+            :class="{ 'bg-white dark:text-black': pageType === 'main' }"
             >CVC</label
           >
           <input
@@ -111,7 +127,11 @@
             v-mask="'###'"
             v-model="cvc"
             @input="validateCVC"
-            :class="{ 'input-error': !validCVC && cvc.length > 0 }"
+            :class="{
+              'input-error': !validCVC && cvc.length > 0,
+              'bg-white dark:text-black border border-green-500':
+                pageType === 'main',
+            }"
             required
           />
         </div>
@@ -123,19 +143,20 @@
         :class="{
           'cursor-not-allowed': !isFormValid,
           'cursor-pointer': isFormValid,
+          'bg-[#D2D2D2] dark:text-white ': pageType === 'main',
         }"
         :disabled="!isFormValid"
         @click="submitForm"
-        class="text-white bg-[#617398] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       >
         Submit
-        {{ isFormValid }}
       </button>
 
       <button
         type="button"
         @click="closePopup"
         class="text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        :class="{ ' dark:text-black ': pageType === 'main' }"
       >
         Cancel
       </button>
@@ -152,6 +173,12 @@ export default {
     isPopup: {
       type: Boolean,
       required: true,
+    },
+    pageType: {
+      type: String,
+      required: true,
+      default: "main",
+      validator: (value) => ["main", "secondary"].includes(value),
     },
   },
   data() {
@@ -232,6 +259,28 @@ export default {
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
+  &.main {
+    form {
+      background: white;
+      input {
+        color: black;
+      }
+    }
+    h3 {
+      color: black;
+    }
+  }
+  &.secondary {
+    form {
+      background: rgba(77, 94, 130, 1);
+      input {
+        color: white;
+      }
+    }
+    h3 {
+      color: white;
+    }
+  }
   img {
     width: 30px;
   }
@@ -294,9 +343,6 @@ export default {
     text-align: center;
     display: flex;
     flex-direction: column;
-    input {
-      color: white;
-    }
   }
   h3 {
     font-family: "Proxima Nova Bold";
@@ -304,7 +350,6 @@ export default {
     font-weight: 800;
     line-height: 25.2px;
     text-align: center;
-    color: white;
     padding: 15px 0;
   }
 }

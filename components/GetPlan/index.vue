@@ -1,6 +1,6 @@
 <template>
     <div :class="['get-plan', pageType]">
-      <PaymentPopUp :isPopup="isPopup" @update:isPopup="isPopup = $event" />
+      <PaymentPopUp :isPopup="isPopup" @update:isPopup="isPopup = $event" :pageType="pageType" />
       <h1 class="get-plan__title">
         <span>Start</span> your learning journey <span>now</span>
       </h1>

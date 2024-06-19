@@ -11,7 +11,7 @@ export default {
     time: {
       type: Number,
       required: false,
-      default: 3
+      default: 4
     },
     bgColor: {
       type: String,
@@ -50,9 +50,9 @@ export default {
       }, 1000); 
     },
     getTimeFromLocalStorage() {
-      // TODO: remove after work
-      // return parseInt(localStorage.getItem('timer_time'), 10);
-      return parseInt(120, 10);
+      return parseInt(localStorage.getItem('timer_time'), 10);
+      // Placeholder to work
+      // return parseInt(120, 10);
     },
     saveTimeToLocalStorage(seconds) {
       localStorage.setItem('timer_time', seconds.toString());

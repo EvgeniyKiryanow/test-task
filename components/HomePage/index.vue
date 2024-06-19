@@ -39,6 +39,26 @@ export default {
 </script>
 
 <style lang="scss">
+@media (max-width: 940px) {
+  .home-page {
+    section {
+    margin: 0 10vw;
+    flex-direction: column;
+    & > div {
+      width:100%;
+      color: white;
+    }
+    div {
+      &:first-child {
+        margin-bottom: 25px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 25px;
+        border-radius: 15px;
+      }
+    }
+  }
+  }
+}
 section {
   display: flex;
   justify-content: space-around;

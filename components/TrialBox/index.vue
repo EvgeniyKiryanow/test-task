@@ -88,7 +88,7 @@ export default {
       color: #01c120;
     }
     .trial-box__button {
-      color: var(--secondary-color);
+      color: #01c120;
     }
   }
   &.secondary {
