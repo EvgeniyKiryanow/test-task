@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
   css: ["@/assets/fonts/fonts.css", "@/assets/css/variables.css"],
-  target: "static",
   build: {
     publicPath: '/test-task-name/_nuxt/',
   },
