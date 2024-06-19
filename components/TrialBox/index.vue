@@ -1,9 +1,9 @@
 <template>
   <div :class="pageType" class="trial-box rounded rounded-2xl">
     <!-- TODO: update color and for SVG and for text -->
-    <GetPlan :pageType="pageType" />
+    <GetPlan v-if="!isMobile" :pageType="pageType" />
     <div class="px-6 py-4 trial-box__information">
-      <!-- <PriceAndTimer :pageType="pageType" /> -->
+      <PriceAndTimer v-if="isMobile" :pageType="pageType" />
       <NuxtImg
         v-if="pageType === 'secondary'"
         class="trial-box__img"
@@ -46,9 +46,11 @@
 
 <script>
 import PriceAndTimer from "@/components/PriceAndTimer";
+import deviceMixin from '@/mixins/deviceMixin';
 import GetPlan from "@/components/GetPlan";
 export default {
   name: "TrialBox",
+  mixins: [deviceMixin],
   components: { PriceAndTimer, GetPlan },
   props: {
     pageType: {
@@ -62,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
   .trial-box {
     &.main {
       background-color: transparent !important;

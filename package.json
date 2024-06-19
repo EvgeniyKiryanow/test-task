@@ -13,6 +13,7 @@
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "nuxt": "^3.12.1",
+    "ua-parser-js": "^1.0.38",
     "vue": "^3.4.27",
     "vue-router": "^4.3.3",
     "vue-the-mask": "^0.11.1"

@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
   .price-timer {
     &.secondary {
       .price-timer__header-wrapper {

@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
   .get-plan {
     margin-bottom: 0 !important;
     padding: 25px;

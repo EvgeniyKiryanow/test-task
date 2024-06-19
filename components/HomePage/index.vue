@@ -4,8 +4,8 @@
     <div :class="`home-page__bg-${updatedPageType}`"></div>
     <TopHeader :pageType="updatedPageType" />
     <section>
-      <PriceAndTimer :pageType="updatedPageType" />
-      <!-- <GetPlan :pageType="updatedPageType" /> -->
+      <PriceAndTimer v-if="!isMobile" :pageType="updatedPageType" />
+      <GetPlan v-if="isMobile" :pageType="updatedPageType" />
       <TrialBox :pageType="updatedPageType" />
     </section>
   </div>
@@ -18,6 +18,7 @@ import GetPlan from "@/components/GetPlan";
 import TrialBox from "@/components/TrialBox";
 import { useRoute } from "nuxt/app";
 import { queryHelper } from "@/helpers/queryHelper.js";
+import deviceMixin from '@/mixins/deviceMixin';
 
 export default {
   components: {
@@ -26,6 +27,7 @@ export default {
     TrialBox,
     PriceAndTimer,
   },
+  mixins: [deviceMixin],
   data() {
     return {
       typeQuery: "",
@@ -42,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
   .home-page {
     section {
       margin: 0 10vw;
