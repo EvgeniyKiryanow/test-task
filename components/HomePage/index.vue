@@ -1,6 +1,5 @@
 <template>
   <div class="home-page" :class="pageType">
-    <!-- TODO: update use mixin + mock data to avoid props not props for pageType -->
     <div :class="`home-page__bg-${pageType}`"></div>
     <TopHeader />
     <section>
@@ -16,8 +15,9 @@ import PriceAndTimer from "@/components/PriceAndTimer";
 import TopHeader from "@/components/TopHeader";
 import GetPlan from "@/components/GetPlan";
 import TrialBox from "@/components/TrialBox";
-import deviceMixin from '@/mixins/deviceMixin';
-import pageType from '@/mixins/pageType';
+import deviceMixin from "@/mixins/deviceMixin";
+import pageType from "@/mixins/pageType";
+import mockData from "@/mocks/mockData";
 
 export default {
   components: {
@@ -27,6 +27,14 @@ export default {
     PriceAndTimer,
   },
   mixins: [deviceMixin, pageType],
+  data() {
+    return {
+      parsedData: null,
+    };
+  },
+  mounted() {
+    this.parsedData = mockData;
+  },
 };
 </script>
 

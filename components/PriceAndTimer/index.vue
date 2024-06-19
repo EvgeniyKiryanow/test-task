@@ -53,7 +53,7 @@ export default {
 .price-timer {
   &.main {
     .type-format {
-      color: #01c120;
+    color: var(--main-color);
     }
   }
   &.secondary {

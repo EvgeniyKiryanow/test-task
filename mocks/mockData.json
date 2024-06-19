@@ -1,0 +1,41 @@
+{
+    "id": "testMock",
+    "main": {
+        "id": "main",
+        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month . You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy , Money Back , and Subscription Terms .",
+        "planList": [
+            "Exclusive access to 350+ learning programs",
+            "Personalized course plan",
+            "Comfy learning schedule made by you",
+            "24/7 tutor support in a secure chat",
+            "Lifetime access to materials"
+        ],
+        "price": 3.99,
+        "pricePerWeek": 39.99,
+        "priceTrial": 0.99,
+        "timer": 3,
+        "title": {
+            "firstTitle": "Planet",
+            "secondTitle": "Learn"
+        }
+    },
+    "secondary": {
+        "id": "secondary",
+        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month . You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy , Money Back , and Subscription Terms .",
+        "planList": [
+            "Exclusive access to 350+ learning programs",
+            "Personalized course plan",
+            "Comfy learning schedule made by you",
+            "24/7 tutor support in a secure chat",
+            "Lifetime access to materials"
+        ],
+        "price": 3.99,
+        "pricePerWeek": 39.99,
+        "priceTrial": 0.99,
+        "timer": 4,
+        "title": {
+            "firstTitle": "Smart",
+            "secondTitle": "Study"
+        }
+    }
+}
