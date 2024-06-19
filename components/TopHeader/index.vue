@@ -9,16 +9,10 @@
 </template>
 
 <script>
+import pageType from "@/mixins/pageType";
 export default {
   name: "TopHeader",
-  props: {
-    pageType: {
-      type: String,
-      required: true,
-      default: "main",
-      validator: (value) => ["main", "secondary"].includes(value),
-    },
-  },
+  mixins: [pageType],
   computed: {
     pageConfig() {
       return {

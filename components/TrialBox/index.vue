@@ -48,18 +48,11 @@
 import PriceAndTimer from "@/components/PriceAndTimer";
 import deviceMixin from '@/mixins/deviceMixin';
 import GetPlan from "@/components/GetPlan";
+import pageType from '@/mixins/pageType';
 export default {
   name: "TrialBox",
-  mixins: [deviceMixin],
+  mixins: [deviceMixin, pageType],
   components: { PriceAndTimer, GetPlan },
-  props: {
-    pageType: {
-      type: String,
-      required: true,
-      default: "main",
-      validator: (value) => ["main", "secondary"].includes(value),
-    },
-  },
 };
 </script>
 

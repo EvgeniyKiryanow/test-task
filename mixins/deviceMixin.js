@@ -8,13 +8,13 @@ export default {
     };
   },
   computed: {
-    isTypeMobile() {
+    isMobileType() {
       const parser = new UAParser();
       const result = parser.getResult();
       return result.device.type === 'mobile';
     },
     isMobile() {
-      return this.windowWidth > 1024 || !this.isTypeMobile;
+      return this.windowWidth > 1024 || !this.isMobileType;
     },
   },
   mounted() {

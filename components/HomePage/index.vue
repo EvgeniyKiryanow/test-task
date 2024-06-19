@@ -1,12 +1,12 @@
 <template>
-  <div class="home-page" :class="updatedPageType">
+  <div class="home-page" :class="pageType">
     <!-- TODO: update use mixin + mock data to avoid props not props for pageType -->
-    <div :class="`home-page__bg-${updatedPageType}`"></div>
-    <TopHeader :pageType="updatedPageType" />
+    <div :class="`home-page__bg-${pageType}`"></div>
+    <TopHeader />
     <section>
-      <PriceAndTimer v-if="!isMobile" :pageType="updatedPageType" />
-      <GetPlan v-if="isMobile" :pageType="updatedPageType" />
-      <TrialBox :pageType="updatedPageType" />
+      <PriceAndTimer v-if="!isMobile" />
+      <GetPlan v-if="isMobile" />
+      <TrialBox />
     </section>
   </div>
 </template>
@@ -16,9 +16,8 @@ import PriceAndTimer from "@/components/PriceAndTimer";
 import TopHeader from "@/components/TopHeader";
 import GetPlan from "@/components/GetPlan";
 import TrialBox from "@/components/TrialBox";
-import { useRoute } from "nuxt/app";
-import { queryHelper } from "@/helpers/queryHelper.js";
 import deviceMixin from '@/mixins/deviceMixin';
+import pageType from '@/mixins/pageType';
 
 export default {
   components: {
@@ -27,19 +26,7 @@ export default {
     TrialBox,
     PriceAndTimer,
   },
-  mixins: [deviceMixin],
-  data() {
-    return {
-      typeQuery: "",
-      updatedPageType: "",
-    };
-  },
-  mounted() {
-    const route = useRoute();
-    this.typeQuery = route.query.type || "";
-    this.updatedPageType = queryHelper(route.query.type);
-    this.typeQuery = this.updatedPageType;
-  },
+  mixins: [deviceMixin, pageType],
 };
 </script>
 

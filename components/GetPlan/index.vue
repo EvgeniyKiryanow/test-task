@@ -29,17 +29,11 @@
 
 <script>
 import PaymentPopUp from "@/components/PaymentPopUp";
+import pageType from '@/mixins/pageType';
 export default {
   name: "GetPlan",
   components: { PaymentPopUp },
-  props: {
-    pageType: {
-      type: String,
-      required: true,
-      default: "main",
-      validator: (value) => ["main", "secondary"].includes(value),
-    },
-  },
+  mixins: [pageType],
   data() {
     return {
       isPopup: false,

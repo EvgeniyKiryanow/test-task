@@ -15,17 +15,11 @@
 
 <script>
 import Timer from "@/components/LifeTimer";
+import pageType from '@/mixins/pageType';
 export default {
   name: "PriceAndTimer",
   components: { Timer },
-  props: {
-    pageType: {
-      type: String,
-      required: true,
-      default: "main",
-      validator: (value) => ["main", "secondary"].includes(value),
-    },
-  },
+  mixins: [pageType]
 };
 </script>
 

@@ -167,19 +167,15 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import pageType from "@/mixins/pageType";
 export default {
   name: "PaymentPopUp",
   directives: { mask },
+  mixins: [pageType],
   props: {
     isPopup: {
       type: Boolean,
       required: true,
-    },
-    pageType: {
-      type: String,
-      required: true,
-      default: "main",
-      validator: (value) => ["main", "secondary"].includes(value),
     },
   },
   data() {
