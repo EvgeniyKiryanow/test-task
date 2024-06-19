@@ -1,6 +1,6 @@
 <template>
   <header :class="['header', pageType]">
-    <NuxtImg :src="pageConfig[pageType]?.logoSrc" />
+    <NuxtImg alt="Logo" :src="pageConfig[pageType]?.logoSrc" />
     <h3>
       <span>{{ pageConfig[pageType]?.firstText }}</span
       >{{ pageConfig[pageType]?.secondText }}

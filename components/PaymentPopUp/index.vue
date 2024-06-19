@@ -8,14 +8,14 @@
         type="button"
         class="text-gray-900 bg-[#F7BE38] focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
       >
-        <NuxtImg src="images/PayPal.svg" />
+        <NuxtImg alt="Paypal" src="images/PayPal.svg" />
         BUY NOW
       </button>
       <button
         type="button"
         class="text-gray-900 bg-[white] border focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2"
       >
-        <NuxtImg src="images/GPay.svg" />
+        <NuxtImg alt="GPay" src="images/GPay.svg" />
         Pay
       </button>
 
@@ -63,7 +63,7 @@
         <div
           class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
         >
-          <NuxtImg src="images/MasterCard.svg" />
+          <NuxtImg alt="MasterCard" src="images/MasterCard.svg" />
         </div>
       </div>
 

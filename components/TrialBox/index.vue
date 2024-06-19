@@ -8,11 +8,13 @@
         v-if="pageType === 'secondary'"
         class="trial-box__img"
         src="/images/Rocket.svg"
+        alt="Rocket"
       />
       <NuxtImg
         v-if="pageType === 'main'"
         class="trial-box__img"
         src="/images/Asteroid.svg"
+        alt="Asteroid"
       />
       <div>
         <ul class="trial-box__items custom-icons">
