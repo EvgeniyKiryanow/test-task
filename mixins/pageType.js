@@ -10,7 +10,7 @@ export default {
   mounted() {
     const route = useRoute();
     this.typeQuery = route.query.type || "";
-    this.pageType = queryHelper(route.query.type)|| "main";
+    this.pageType = queryHelper(route.query.type) || "main";
     this.typeQuery = this.pageType;
   },
 };

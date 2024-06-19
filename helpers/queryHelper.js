@@ -1,40 +1,50 @@
 // helpers/queryHelper.js
-export const queryHelper = function (query) {
-  if (process.client) {
+let queryHelperInstance = null;
+
+class QueryHelper {
+  constructor(query) {
+    if (process.client) {
+      this.query = query;
+      this.updatedQuery = this.initializeQuery();
+    } else {
+      console.warn("Cannot access localStorage in server-side rendering (SSR) context.");
+      this.updatedQuery = "";
+    }
+  }
+
+  initializeQuery() {
     const storeQueryValue = window.localStorage.getItem("type");
     const urlSearchParams = new URLSearchParams(window.location.search);
     const currentQueryParam = urlSearchParams.get("type");
-    const posibleTypes = ["main", "secondary"];
     let updatedQuery = "";
 
-    if (query === "random") {
-      const posibleTypes = ["main", "secondary"];
-      const selectedValue =
-        Math.random() < 0.5 ? posibleTypes[0] : posibleTypes[1];
+    if (this.query === "random") {
+      const possibleTypes = ["main", "secondary"];
+      const selectedValue = possibleTypes[Math.floor(Math.random() * possibleTypes.length)];
       window.localStorage.setItem("type", selectedValue);
       urlSearchParams.set("type", selectedValue);
       updatedQuery = selectedValue;
-    } else if (query) {
-      window.localStorage.setItem("type", query);
-      urlSearchParams.set("type", query);
-      updatedQuery = query;
-    } else if (
-      !query &&
-      storeQueryValue &&
-      storeQueryValue !== currentQueryParam
-    ) {
+    } else if (this.query) {
+      window.localStorage.setItem("type", this.query);
+      urlSearchParams.set("type", this.query);
+      updatedQuery = this.query;
+    } else if (storeQueryValue && storeQueryValue !== currentQueryParam) {
       urlSearchParams.set("type", storeQueryValue);
       updatedQuery = storeQueryValue;
     } else {
-      updatedQuery = query;
+      updatedQuery = currentQueryParam || "";
     }
 
     const newUrl = `${window.location.pathname}?${urlSearchParams.toString()}`;
     window.history.replaceState({}, "", newUrl);
+
     return updatedQuery;
-  } else {
-    console.warn(
-      "Cannot access localStorage in server-side rendering (SSR) context."
-    );
   }
+}
+
+export const queryHelper = (query) => {
+  if (!queryHelperInstance) {
+    queryHelperInstance = new QueryHelper(query);
+  }
+  return queryHelperInstance.updatedQuery;
 };
