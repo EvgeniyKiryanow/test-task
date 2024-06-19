@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@nuxt/image"],
   css: ["@/assets/fonts/fonts.css", "@/assets/css/variables.css"],
   target: "static",
+  build: {
+    publicPath: '/test-task-name/_nuxt/',
+  },
   router: {
     base: "/test-task/",
   },
