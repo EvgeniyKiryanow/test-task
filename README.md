@@ -1,6 +1,6 @@
 # Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Please take a look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
@@ -20,7 +20,9 @@ Start the development server on `http://localhost:3000`:
 npm run dev
 ```
 ## URLs query
-By default will be main type, but App has several options:
-1) ?type=main
-2) ?type=secondary
-3) ?type=random (50/50 main/secondary) 
+By default, this will be the main type, but the App has several options:
+1) http://localhost:3000/?type=main
+2) http://localhost:3000/?type=secondary
+3) http://localhost:3000/?type=random (50/50 main/secondary) 
+
+Also, I used different solutions, because it is a test task, so I want to show different solutions.
