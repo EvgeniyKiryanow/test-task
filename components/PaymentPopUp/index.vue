@@ -1,6 +1,6 @@
 <template>
   <div v-if="isPopup" class="popup" :class="pageType">
-    <form class="w-full max-w-lg" @submit.prevent="submitForm">
+    <form class="w-full max-w-lg" autocomplete="off" @submit.prevent="submitForm">
       <h3>Payment Method</h3>
 
       <!-- Payment Buttons -->
@@ -277,7 +277,12 @@ export default {
     },
     submitForm() {
       if (this.isFormValid) {
-        alert("Form submitted successfully!");
+        alert("Form submitted successfully!",
+          this.cardNumber, 'Your card Number',
+          this.expiryMonth, 'Your month',
+          this.expiryYear, 'Your year',
+          this.cvc, 'Your CVC'
+        );
         this.$emit("update:isPopup", false);
       }
     },
