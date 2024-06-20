@@ -1,12 +1,20 @@
 <template>
   <div class="price-timer" :class="pageType">
     <div class="price-timer__header-wrapper">
-      <div class="price-timer__header">
-        <h3 class="price-timer__days">
-          3-day trial for <span class="type-format">$0.99</span>
-        </h3>
-        <h4 class="price-timer__price">Then $9.99</h4>
-        <h5 class="price-timer__price-week">$39.99/week</h5>
+      <div
+        v-if="parsedData && parsedData[pageType]"
+        class="price-timer__header"
+      >
+        <h3
+          class="price-timer__days"
+          v-html="parsedData[pageType].headerPrice"
+        ></h3>
+        <h4 class="price-timer__price">
+          Then {{ parsedData[pageType].priceTrial }}$
+        </h4>
+        <h5 class="price-timer__price-week">
+          {{ parsedData[pageType].pricePerWeek }}/week
+        </h5>
       </div>
       <Timer :bgColor="pageType === 'main' ? '#00CA14' : '#4EAAFF'" :time="5" />
     </div>
@@ -15,11 +23,18 @@
 
 <script>
 import Timer from "@/components/LifeTimer";
-import pageType from '@/mixins/pageType';
+import pageType from "@/mixins/pageType";
 export default {
   name: "PriceAndTimer",
   components: { Timer },
-  mixins: [pageType]
+  mixins: [pageType],
+  props: {
+    parsedData: {
+      type: Object,
+      requred: true,
+      default: () => {},
+    },
+  },
 };
 </script>
 
@@ -53,7 +68,7 @@ export default {
 .price-timer {
   &.main {
     .type-format {
-    color: var(--main-color);
+      color: var(--main-color);
     }
   }
   &.secondary {

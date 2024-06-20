@@ -3,9 +3,9 @@
     <div :class="`home-page__bg-${pageType}`"></div>
     <TopHeader />
     <section>
-      <PriceAndTimer v-if="!isMobile" />
+      <PriceAndTimer :parsedData="parsedData" v-if="!isMobile" />
       <GetPlan v-if="isMobile" />
-      <TrialBox />
+      <TrialBox :parsedData="parsedData" />
     </section>
   </div>
 </template>
@@ -51,8 +51,6 @@ export default {
       div {
         &:first-child {
           margin-bottom: 25px;
-          // background: rgba(0, 0, 0, 0.5);
-          // padding: 25px;
           border-radius: 15px;
         }
       }

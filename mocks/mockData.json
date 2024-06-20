@@ -2,40 +2,35 @@
     "id": "testMock",
     "main": {
         "id": "main",
-        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month . You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy , Money Back , and Subscription Terms .",
+        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month. You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy, Money Back, and Subscription Terms.",
+        "headerPrice": "3-day trial for <span class='type-format'>$0.99</span>",
         "planList": [
-            "Exclusive access to 350+ learning programs",
+            "Exclusive access to <span class='type-format'>350+</span> learning programs",
             "Personalized course plan",
             "Comfy learning schedule made by you",
-            "24/7 tutor support in a secure chat",
+            "<span class='type-format'>24/7</span> tutor support in a secure chat",
             "Lifetime access to materials"
         ],
         "price": 3.99,
         "pricePerWeek": 39.99,
         "priceTrial": 0.99,
-        "timer": 3,
-        "title": {
-            "firstTitle": "Planet",
-            "secondTitle": "Learn"
-        }
+        "timer": 3
     },
     "secondary": {
         "id": "secondary",
-        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month . You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy , Money Back , and Subscription Terms .",
+        "notice": "$0.99 charged today. If you don't cancel at least 24 hours before the end of the 3-day trial period, you will automatically be charged the full price of $19.99/Month. You can cancel your subscription at any time. By continuing, you indicate that you've read and agree to our Terms & Conditions, Privacy Policy, Money Back, and Subscription Terms.",
+        "title": "<span class='type-format'>Start</span> your learning journey <span class='type-format'>now</span>",
+        "headerPrice": "<span class='type-format'>3-day trial for $0.99</span>",
         "planList": [
-            "Exclusive access to 350+ learning programs",
+            "<span class='type-format'>Exclusive access to 350+ learning programs</span>",
             "Personalized course plan",
             "Comfy learning schedule made by you",
-            "24/7 tutor support in a secure chat",
+            "<span class='type-format'>24/7 tutor support in a secure chat</span>",
             "Lifetime access to materials"
         ],
         "price": 3.99,
         "pricePerWeek": 39.99,
         "priceTrial": 0.99,
-        "timer": 4,
-        "title": {
-            "firstTitle": "Smart",
-            "secondTitle": "Study"
-        }
+        "timer": 4
     }
 }

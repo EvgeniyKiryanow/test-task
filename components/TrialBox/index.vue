@@ -1,9 +1,12 @@
 <template>
   <div :class="pageType" class="trial-box rounded rounded-2xl">
-    <!-- TODO: update color and for SVG and for text -->
     <GetPlan v-if="!isMobile" :pageType="pageType" />
     <div class="px-6 py-4 trial-box__information">
-      <PriceAndTimer v-if="isMobile" :pageType="pageType" />
+      <PriceAndTimer
+        :parsedData="parsedData"
+        v-if="isMobile"
+        :pageType="pageType"
+      />
       <NuxtImg
         v-if="pageType === 'secondary'"
         class="trial-box__img"
@@ -16,18 +19,23 @@
         src="/images/Asteroid.svg"
         alt="Asteroid"
       />
-      <div>
-        <ul class="trial-box__items custom-icons">
-          <li class="trial-box__item">
-            Exclusive access to <span class="type-format">350+</span> learning
-            programs
-          </li>
-          <li class="trial-box__item">Personalized course plan</li>
-          <li class="trial-box__item">Comfy learning schedule made by you</li>
-          <li class="trial-box__item">
-            <span class="type-format">24/7</span> tutor support in a secure chat
-          </li>
-          <li class="trial-box__item">Lifetime access to materials</li>
+      <NuxtImg
+        v-if="pageType === 'secondary'"
+        class="trial-box__img-ellipse"
+        src="/images/Ellipse.svg"
+        alt="Ellipse"
+      />
+      <div
+        v-if="
+          parsedData && parsedData[pageType] && parsedData[pageType].planList
+        "
+      >
+        <ul
+          class="trial-box__items custom-icons"
+          v-for="(list, index) in parsedData[pageType].planList"
+          :key="index"
+        >
+          <li class="trial-box__item" v-html="list"></li>
         </ul>
       </div>
       <button class="trial-box__button">
@@ -49,13 +57,11 @@
         Safe & secure payment
       </button>
 
-      <p class="text-gray-700 text-base trial-box__notice">
-        $0.99 charged today. If you don't cancel at least 24 hours before the
-        end of the 3-day trial period, you will automatically be charged the
-        full price of $19.99/Month . You can cancel your subscription at any
-        time. By continuing, you indicate that you've read and agree to our
-        Terms & Conditions, Privacy Policy , Money Back , and Subscription Terms
-        .
+      <p
+        v-if="parsedData && parsedData[pageType] && parsedData[pageType].notice"
+        class="text-gray-700 text-base trial-box__notice"
+      >
+        {{ parsedData[pageType].notice }}
       </p>
     </div>
   </div>
@@ -70,10 +76,17 @@ export default {
   name: "TrialBox",
   mixins: [deviceMixin, pageType],
   components: { PriceAndTimer, GetPlan },
+  props: {
+    parsedData: {
+      type: Object,
+      requred: true,
+      default: () => {},
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @media (max-width: 1024px) {
   .trial-box {
     &.main {
@@ -121,12 +134,24 @@ export default {
     .trial-box__button {
       color: var(--secondary-color);
     }
+    .trial-box__item {
+      &:before {
+        background-image: url("/images/Dot.svg");
+      }
+    }
   }
   &__img {
     position: absolute;
     right: 5%;
     width: 200px;
     top: -15%;
+    &-ellipse {
+      position: absolute;
+      left: -25px;
+      top: -25px;
+      width: 70px;
+      z-index: -1;
+    }
   }
   &__items {
     list-style-type: none;
